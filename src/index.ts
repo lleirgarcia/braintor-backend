@@ -27,6 +27,8 @@ app.post('/process', async (req: Request, res: Response) => {
     }
 
     try {
+        let main = await promptByType("mainSummary");
+        console.log("File: " + main)
         const detailTranscription = await openAIService.processOpenAICall(transcription, await promptByType("mainSummary"));
         const response = await openAIService.processOpenAICall(detailTranscription, await promptByType(transcriptionType));
         res.json({ response });
